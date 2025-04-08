@@ -1,14 +1,14 @@
-# ✅ Core ML packages - verified compatible with Python 3.11.7
+# ✅ Deep Learning / ML dependencies (set first to avoid conflict)
 tensorflow==2.13.1
 keras==2.13.1
-torch==2.2.0
-torchvision==0.17.0
-deepface==0.0.79
-
-# ✅ Dependencies handled automatically (no need to manually add typing-extensions)
+torch==1.13.1        # ✅ Compatible with TensorFlow's typing-extensions range
+torchvision==0.14.1  # ✅ Compatible with torch 1.13.1
 numpy>=1.23.0,<1.25.0
 protobuf>=3.20.3,<5.0.0
 opencv-python==4.10.0.84
+deepface==0.0.79
+
+
 
 
 
