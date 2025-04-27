@@ -1,6 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from flask import Flask, request, jsonify
 from ai_services.anomaly_detector.detector import AnomalyDetector
 from ai_services.logger.log_writer import write_log
