@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify
 from ai_services.anomaly_detector.detector import AnomalyDetector
 from ai_services.logger.log_writer import write_log
 from ai_services.recovery.recover import auto_recover
+import os
 
 app = Flask(__name__)
 detector = AnomalyDetector()
@@ -35,4 +36,5 @@ def analyze_traffic():
     })
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Get the PORT from environment variable
+    app.run(debug=True, host="0.0.0.0", port=port)
