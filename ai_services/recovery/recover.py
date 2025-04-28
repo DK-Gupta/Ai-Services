@@ -11,6 +11,14 @@ blocked_ips = {}
 
 def auto_recover(source_ip):
     current_time = time.time()
+
+    # 💥 Check if IP is already blocked
+    if source_ip in blocked_ips:
+        return {
+            "action": "blocked",
+            "reason": "IP is already blocked"
+        }
+
     window_start = current_time - 60  # 60-second sliding window
 
     # Initialize for new IP
@@ -23,11 +31,11 @@ def auto_recover(source_ip):
     # Append new timestamp
     request_log[source_ip].append(current_time)
 
+    # Check if exceeding threshold
     if len(request_log[source_ip]) > MAX_REQUESTS_PER_MIN:
-        if source_ip not in blocked_ips:
-            block_ip(source_ip)
-            log_anomaly(source_ip, "Auto-block triggered due to request flooding")
-            blocked_ips[source_ip] = current_time
+        block_ip(source_ip)
+        log_anomaly(source_ip, "Auto-block triggered due to request flooding")
+        blocked_ips[source_ip] = current_time
         return {
             "action": "blocked",
             "reason": "Exceeded allowed requests per minute"
